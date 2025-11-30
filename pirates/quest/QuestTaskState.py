@@ -1,4 +1,34 @@
-from direct.showbase.PythonUtil import ParamObj
+try:
+    from direct.showbase.PythonUtil import ParamObj
+except ImportError:
+    class ParamObj(object):
+        class ParamSet(object):
+            Params = {}
+
+            def __init__(self, **kwargs):
+                self.__dict__.update(self.Params)
+                self.__dict__.update(kwargs)
+
+        def __init__(self, *args, **kwargs):
+            self._apply_defaults()
+            if args and isinstance(args[0], dict) and not kwargs:
+                for k, v in args[0].items():
+                    setattr(self, k, v)
+            else:
+                for k, v in kwargs.items():
+                    setattr(self, k, v)
+
+        def _apply_defaults(self):
+            ps = getattr(self, 'ParamSet', None)
+            if ps and hasattr(ps, 'Params'):
+                for k, v in ps.Params.items():
+                    setattr(self, k, v)
+
+        def getCurrentParams(self):
+            ps = getattr(self, 'ParamSet', None)
+            if ps and hasattr(ps, 'Params'):
+                return {k: getattr(self, k, None) for k in ps.Params}
+            return self.__dict__.copy()
 
 class QuestTaskState(ParamObj):
 

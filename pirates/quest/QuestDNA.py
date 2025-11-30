@@ -1,6 +1,56 @@
 from direct.directnotify import DirectNotifyGlobal
-from direct.showbase.PythonUtil import ParamObj, makeTuple
-from direct.showbase.PythonUtil import getSetter, POD
+try:
+    from direct.showbase.PythonUtil import ParamObj, makeTuple
+    from direct.showbase.PythonUtil import getSetter, POD
+except ImportError:
+    from direct.showbase.PythonUtil import makeTuple
+
+    class POD(object):
+        """
+        Minimal stand-in for Panda's old POD helper.
+        """
+
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
+
+    class ParamObj(object):
+        """
+        Minimal ParamObj shim to satisfy quest data loading.
+        """
+
+        class ParamSet(object):
+            Params = {}
+
+            def __init__(self, **kwargs):
+                self.__dict__.update(self.Params)
+                self.__dict__.update(kwargs)
+
+        def __init__(self, *args, **kwargs):
+            self._apply_defaults()
+            if args and isinstance(args[0], dict) and not kwargs:
+                for k, v in args[0].items():
+                    setattr(self, k, v)
+            else:
+                for k, v in kwargs.items():
+                    setattr(self, k, v)
+
+        def _apply_defaults(self):
+            ps = getattr(self, 'ParamSet', None)
+            if ps and hasattr(ps, 'Params'):
+                for k, v in ps.Params.items():
+                    setattr(self, k, v)
+
+        def getCurrentParams(self):
+            ps = getattr(self, 'ParamSet', None)
+            if ps and hasattr(ps, 'Params'):
+                return {k: getattr(self, k, None) for k in ps.Params}
+            return self.__dict__.copy()
+
+    def getSetter(name):
+        def setter(self, value):
+            setattr(self, name, value)
+
+        return setter
 from pirates.piratesbase import PLocalizer
 from pirates.quest.QuestLadder import QuestStub
 import random
@@ -84,6 +134,9 @@ class QuestDNA(ParamObj):
             states.append(task.getInitialTaskState(holder))
 
         return states
+
+    def setQuestId(self, questId):
+        self.questId = questId
 
     def _getString(self, stringName):
         if self.questId not in PLocalizer.QuestStrings:

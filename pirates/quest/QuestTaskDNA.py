@@ -1,5 +1,12 @@
 from direct.directnotify.DirectNotifyGlobal import directNotify
-from direct.showbase.PythonUtil import POD, invertDict, makeTuple
+try:
+    from direct.showbase.PythonUtil import POD, invertDict, makeTuple
+except ImportError:
+    from direct.showbase.PythonUtil import invertDict, makeTuple
+
+    class POD(object):
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
 from pirates.quest import QuestEvent, QuestTaskState
 from pirates.piratesbase import PLocalizer
 from pirates.pirate import AvatarTypes

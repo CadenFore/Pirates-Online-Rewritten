@@ -1,5 +1,12 @@
 import random
-from direct.showbase.PythonUtil import POD, invertDict, getSetterName
+try:
+    from direct.showbase.PythonUtil import POD, invertDict, getSetterName
+except ImportError:
+    from direct.showbase.PythonUtil import invertDict, getSetterName
+
+    class POD(object):
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
 from direct.directnotify import DirectNotifyGlobal
 from pirates.quest import QuestRewardStruct
 from pirates.uberdog.UberDogGlobals import InventoryType, InventoryCategory

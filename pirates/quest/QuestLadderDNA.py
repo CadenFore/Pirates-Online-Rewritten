@@ -65,6 +65,9 @@ class QuestContainerDNA(POD):
 
         return None
 
+    def getContainers(self):
+        return self.containers or ()
+
     def initialize(self, parentIsChoice=False):
         for container in self.getContainers():
             container.initialize(parentIsChoice)
@@ -121,6 +124,9 @@ class QuestContainerDNA(POD):
         if dialog is not None:
             return dialog
         return random.choice(PLocalizer.QuestDefaultDialogBrushoff)
+
+    def getDroppable(self):
+        return getattr(self, 'droppable', False)
 
     def getAnimSetAfter(self):
         anims = self._getString('animSetAfter')

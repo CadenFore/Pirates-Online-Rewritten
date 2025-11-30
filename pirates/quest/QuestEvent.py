@@ -1,4 +1,9 @@
-from direct.showbase.PythonUtil import POD
+try:
+    from direct.showbase.PythonUtil import POD
+except ImportError:
+    class POD(object):
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
 from direct.task.Task import Task
 from pirates.piratesbase import PiratesGlobals
 import random

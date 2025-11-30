@@ -1,4 +1,16 @@
-from direct.showbase.PythonUtil import POD, makeTuple
+try:
+    # Older POTCO code expects POD; newer Panda builds may not provide it.
+    from direct.showbase.PythonUtil import POD, makeTuple
+except ImportError:
+    from direct.showbase.PythonUtil import makeTuple
+
+    class POD(object):
+        """
+        Minimal stand-in for the old POD helper. It just stores kwargs on self.
+        """
+
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
 from pirates.uberdog.UberDogGlobals import InventoryType
 from pirates.inventory import ItemGlobals
 
