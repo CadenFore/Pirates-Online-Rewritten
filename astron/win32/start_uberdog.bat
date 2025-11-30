@@ -1,6 +1,7 @@
 @echo off
+setlocal
+pushd "%~dp0..\\.."
 title Pirates Online Rewritten - UberDOG
-cd ../../
 
 rem Choose correct python command to execute the game
 set PYTHON_CMD=ppython
