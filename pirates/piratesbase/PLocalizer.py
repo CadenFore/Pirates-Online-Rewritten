@@ -1,12 +1,10 @@
-from panda3d.core import *
+from panda3d.core import ConfigVariableString, ConfigVariableBool
 import string
 import types
-try:
-    language = getConfigExpress().GetString('language', 'english')
-    checkLanguage = getConfigExpress().GetBool('check-language', 1)
-except:
-    language = simbase.config.GetString('language', 'english')
-    checkLanguage = simbase.config.GetBool('check-language', 1)
+
+# Read language directly from config variables; avoid relying on simbase/global.
+language = ConfigVariableString('language', 'english').getValue()
+checkLanguage = ConfigVariableBool('check-language', True).getValue()
 
 def getLanguage():
     return language

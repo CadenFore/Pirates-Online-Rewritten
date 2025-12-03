@@ -1,4 +1,6 @@
 @echo off
+setlocal
+pushd "%~dp0.."
 title Pirates Online Rewritten - Client
 
 rem Server address input selection
@@ -33,8 +35,9 @@ set GAME_INGAME_MOREINFO=http://www.piratesrewritten.com/help
 set GAME_INGAME_NAMING=http://www.piratesrewritten.com/piratecode/
 
 rem PlayToken input
-set /P POR_TOKEN=Token (Default: dev): || ^
-set POR_TOKEN=dev
+set /P POR_TOKEN=Token (Default: dev): 
+if "%POR_TOKEN%"=="" set POR_TOKEN=dev
+
 
 rem Choose correct python command to execute the game
 set PYTHON_CMD=ppython
@@ -44,12 +47,15 @@ echo Starting Pirates Online Rewritten...
 echo Token: %POR_TOKEN%
 echo Gameserver: %POR_GAMESERVER%
 echo PPython: %PYTHON_CMD%
+echo PYTHONPATH will include: %CD%
 echo ====================================
 
-cd ../
-
-rem Start the game using the PYTHON_CMD variable
+rem Ensure the repo root (current directory) is on PYTHONPATH
+set PYTHONPATH=%CD%;%PYTHONPATH%
 :main
 %PYTHON_CMD% -m pirates.piratesbase.PiratesStart
 pause
 goto :main
+
+popd
+endlocal

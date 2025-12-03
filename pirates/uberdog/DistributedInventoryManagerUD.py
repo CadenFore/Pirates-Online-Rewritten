@@ -103,6 +103,11 @@ class DistributedInventoryManagerUD(DistributedObjectGlobalUD):
         DistributedObjectGlobalUD.__init__(self, air)
 
         self.avatar2fsm = {}
+        self.notify.warning('InventoryManagerUD init on channel %s' % self.doId)
+
+    def announceGenerate(self):
+        DistributedObjectGlobalUD.announceGenerate(self)
+        self.notify.warning('InventoryManagerUD generated with doId %s' % self.doId)
 
     def initiateInventory(self, avatarId, callback):
         if not avatarId:

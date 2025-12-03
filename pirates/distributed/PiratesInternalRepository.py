@@ -12,6 +12,9 @@ class PiratesInternalRepository(AstronInternalRepository):
     dbId = 4003
 
     def __init__(self, baseChannel, serverId=None, dcFileNames = None, dcSuffix='AI', connectMethod=None, threadedNet=None):
+        # Default to TCP (ConnectionRepository.CM_NET) unless explicitly overridden.
+        if connectMethod is None:
+            connectMethod = self.CM_NET
         AstronInternalRepository.__init__(self, baseChannel, serverId, dcFileNames, dcSuffix, connectMethod, threadedNet)
 
     def handleConnected(self):

@@ -1,7 +1,7 @@
 # Window:
 window-title Pirates Online Rewritten
 icon-filename phase_3/etc/Pirates_Adds.ico
-win-size 800 600
+win-size 1920 1080
 fullscreen #f
 enforce-clean-exit #t
 
@@ -30,6 +30,9 @@ http-connect-timeout 20
 http-timeout 30
 dc-file astron/dclass/pirates.dc
 dc-file astron/dclass/otp.dc
+air-connect 127.0.0.1:7199
+air-connect-method md
+connect-method md
 
 # Text:
 text-encoding utf8
@@ -118,7 +121,7 @@ contents-xml-dl-attempts 2
 # Development:
 want-dev #t
 crash-on-proactive-leak-detect #f
-sync-video #f
+sync-video 1
 force-tutorial-complete #t
 
 # Async:

@@ -20,8 +20,7 @@ echo District Name: %DISTRICT_NAME%
 echo Base channel: %BASE_CHANNEL%
 echo ============================================
 
-rem Start AI server
-:main
+rem Start AI server (single run; keep window open on exit)
 %PYTHON_CMD% -m pirates.ai.ServiceStart --base-channel %BASE_CHANNEL% ^
     --district-name "%DISTRICT_NAME%"
-goto main
+pause

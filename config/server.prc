@@ -5,3 +5,7 @@ discord-ping-everyone #t
 
 # Notifer:
 notify-timestamp #t
+
+air-connect 127.0.0.1:7199
+air-connect-method md
+connect-method md

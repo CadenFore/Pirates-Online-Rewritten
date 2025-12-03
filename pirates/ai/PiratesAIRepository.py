@@ -74,50 +74,55 @@ class PiratesAIRepository(PiratesInternalRepository):
         """
         Create "global" objects, e.g. TimeManager et al.
         """
+        try:
+            self.notify.info('Generating AI globals...')
+            self.centralLogger = self.generateGlobalObject(OTP_DO_ID_CENTRAL_LOGGER, 'CentralLogger')
 
-        self.centralLogger = self.generateGlobalObject(OTP_DO_ID_CENTRAL_LOGGER, 'CentralLogger')
+            self.populationTracker = DistributedPopulationTrackerAI(self)
+            self.populationTracker.setShardId(self.districtId)
+            self.populationTracker.setPopLimits(config.GetInt('shard-pop-limit-low', 100), config.GetInt('shard-pop-limit-high', 300))
+            self.populationTracker.generateWithRequiredAndId(self.allocateChannel(), self.getGameDoId(), OTP_ZONE_ID_DISTRICTS_STATS)
 
-        self.populationTracker = DistributedPopulationTrackerAI(self)
-        self.populationTracker.setShardId(self.districtId)
-        self.populationTracker.setPopLimits(config.GetInt('shard-pop-limit-low', 100), config.GetInt('shard-pop-limit-high', 300))
-        self.populationTracker.generateWithRequiredAndId(self.allocateChannel(), self.getGameDoId(), OTP_ZONE_ID_DISTRICTS_STATS)
+            self.timeManager = PiratesTimeManagerAI(self)
+            self.timeManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.timeManager = PiratesTimeManagerAI(self)
-        self.timeManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.travelAgent = self.generateGlobalObject(OTP_DO_ID_PIRATES_TRAVEL_AGENT, 'DistributedTravelAgent')
 
-        self.travelAgent = self.generateGlobalObject(OTP_DO_ID_PIRATES_TRAVEL_AGENT, 'DistributedTravelAgent')
+            self.teleportMgr = DistributedTeleportMgrAI(self)
+            self.teleportMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.teleportMgr = DistributedTeleportMgrAI(self)
-        self.teleportMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.timeOfDayMgr = DistributedTimeOfDayManagerAI(self)
+            self.timeOfDayMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.timeOfDayMgr = DistributedTimeOfDayManagerAI(self)
-        self.timeOfDayMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.newsManager = NewsManagerAI(self)
+            self.newsManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.newsManager = NewsManagerAI(self)
-        self.newsManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.holidayMgr = self.generateGlobalObject(OTP_DO_ID_PIRATES_HOLIDAY_MANAGER, 'HolidayManager')
 
-        self.holidayMgr = self.generateGlobalObject(OTP_DO_ID_PIRATES_HOLIDAY_MANAGER, 'HolidayManager')
+            self.gameStatManager = DistributedGameStatManagerAI(self)
+            self.gameStatManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.gameStatManager = DistributedGameStatManagerAI(self)
-        self.gameStatManager.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.targetMgr = TargetManagerAI(self)
+            self.targetMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.targetMgr = TargetManagerAI(self)
-        self.targetMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.spawner = DistributedEnemySpawnerAI(self)
+            self.spawner.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.spawner = DistributedEnemySpawnerAI(self)
-        self.spawner.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.inventoryManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_INVENTORY_MANAGER, 'DistributedInventoryManager')
 
-        self.inventoryManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_INVENTORY_MANAGER, 'DistributedInventoryManager')
+            self.magicWords = PiratesMagicWordManagerAI(self)
+            self.magicWords.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.magicWords = PiratesMagicWordManagerAI(self)
-        self.magicWords.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.tradeMgr = TradeManagerAI(self)
+            self.tradeMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
 
-        self.tradeMgr = TradeManagerAI(self)
-        self.tradeMgr.generateWithRequired(OTP_ZONE_ID_MANAGEMENT)
+            self.crewMatchManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_CREW_MATCH_MANAGER, 'DistributedCrewMatchManager')
 
-        self.crewMatchManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_CREW_MATCH_MANAGER, 'DistributedCrewMatchManager')
-
-        self.guildManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_GUILD_MANAGER, 'PCGuildManager')
+            self.guildManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_GUILD_MANAGER, 'PCGuildManager')
+            self.notify.info('AI globals ready.')
+        except Exception:
+            self.notify.exception('Failed to generate AI globals!')
+            raise
 
     def createZones(self):
         """

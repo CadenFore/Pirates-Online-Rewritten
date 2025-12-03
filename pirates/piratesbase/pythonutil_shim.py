@@ -57,6 +57,10 @@ if not hasattr(PU, 'ParamObj'):
                 for k, v in ps.Params.items():
                     setattr(self, k, v)
 
+        def setDefaultParams(self):
+            """Apply ParamSet defaults to this instance."""
+            self._apply_defaults()
+
         def getCurrentParams(self):
             ps = getattr(self, 'ParamSet', None)
             if ps and hasattr(ps, 'Params'):
@@ -88,8 +92,8 @@ if not hasattr(PU, 'ParamObj'):
 
 if not hasattr(PU, 'getSetter'):
     def getSetter(name):
-        def setter(self, value):
-            setattr(self, name, value)
+        def setter(obj, value=None):
+            setattr(obj, name, value)
 
         return setter
 

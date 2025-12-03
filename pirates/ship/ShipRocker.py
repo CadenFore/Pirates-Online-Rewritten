@@ -1,4 +1,5 @@
-from direct.showbase.PythonUtil import reduceAngle, pivotScalar, rad90, rad270
+from direct.showbase.PythonUtil import reduceAngle, rad90, rad270
+from pirates.piratesbase import pythonutil_shim  # noqa: F401
 import math
 
 class ShipRockerOffState():

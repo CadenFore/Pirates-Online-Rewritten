@@ -47,4 +47,8 @@ class PiratesTimeManager(TimeManager):
     def d_setFrameRate(self, fps, deviation, numAvs, numShips, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName):
         info = '%0.1f fps|%0.3fd|%s avs|%s ships|%s|%d|%d|%s|0x%04x|0x%04x|%0.1fMB|%0.1fMB|%0.1fMB|%d|%s|%s|%s cpus|%s' % (fps, deviation, numAvs, numShips, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, '%s.%d.%d.%d' % osInfo, '%0.03f,%0.03f' % cpuSpeed, '%d,%d' % (numCpuCores, numLogicalCpus), apiName)
         print 'frame rate: %s' % info
-        self.sendUpdate('setFrameRate', [fps, deviation, numAvs, numShips, locationCode, timeInLocation, timeInGame, gameOptionsCode, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, apiName])
+        # Make sure all string fields stay within DC constraints; fallback to empty strings if needed.
+        safeLocation = locationCode if isinstance(locationCode, basestring) else ''
+        safeOptions = gameOptionsCode if isinstance(gameOptionsCode, basestring) else ''
+        safeApi = apiName if isinstance(apiName, basestring) else ''
+        self.sendUpdate('setFrameRate', [fps, deviation, numAvs, numShips, safeLocation, timeInLocation, timeInGame, safeOptions, vendorId, deviceId, processMemory, pageFileUsage, physicalMemory, pageFaultCount, osInfo, cpuSpeed, numCpuCores, numLogicalCpus, safeApi])

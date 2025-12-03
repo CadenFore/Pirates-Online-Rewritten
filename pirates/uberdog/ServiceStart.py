@@ -29,6 +29,10 @@ if args.max_channels: localconfig += 'air-channel-allocation %s\n' % args.max_ch
 if args.stateserver: localconfig += 'air-stateserver %s\n' % args.stateserver
 if args.astron_ip: localconfig += 'air-connect %s\n' % args.astron_ip
 if args.eventlogger_ip: localconfig += 'eventlog-host %s\n' % args.eventlogger_ip
+# Force TCP (Message Director) transport; the default "native" datagram path
+# can reset under the Windows build of Panda3D we’re using.
+localconfig += 'air-connect-method md\n'
+localconfig += 'connect-method md\n'
 loadPrcFileData('Command-line', localconfig)
 
 # Ensure legacy PythonUtil helpers (POD/ParamObj/getSetter) are available.

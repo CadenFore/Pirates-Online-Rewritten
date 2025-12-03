@@ -459,8 +459,11 @@ def getAllParentContainers(ctr):
 
 
 def getAllParentQuestInts(ctr):
-    containers = [
-     ctr.getQuestInt()]
+    if ctr is None:
+        return []
+    containers = []
+    if hasattr(ctr, 'getQuestInt'):
+        containers.append(ctr.getQuestInt())
     parentContainer = getParentContainer(ctr)
     if parentContainer:
         containers += getAllParentQuestInts(parentContainer)

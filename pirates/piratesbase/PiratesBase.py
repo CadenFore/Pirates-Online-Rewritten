@@ -30,6 +30,7 @@ from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from pirates.piratesgui import PDialog
 from pirates.chat.PWhiteList import PWhiteList
+from pirates.piratesbase import pythonutil_shim  # Ensure legacy PythonUtil helpers are available client-side
 import PiratesGlobals
 import __builtin__
 try:

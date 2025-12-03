@@ -11,7 +11,6 @@ echo Starting Pirates Online Rewritten UberDOG...
 echo PPython: %PYTHON_CMD%
 echo ============================================
 
-rem Start UberDOG server
-:main
+rem Start UberDOG server (single run; keep window open on exit)
 %PYTHON_CMD% -m pirates.uberdog.ServiceStart 
-goto main
+pause

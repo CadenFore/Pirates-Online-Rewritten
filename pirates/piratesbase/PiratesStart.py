@@ -14,6 +14,9 @@ import random
 import gc
 from panda3d.core import *
 
+# Ensure legacy PythonUtil helpers (POD/ParamObj/getSetter) are available in the client.
+from pirates.piratesbase import pythonutil_shim  # noqa: F401
+
 if __debug__:
     loadPrcFile('config/general.prc')
     loadPrcFile('config/dev.prc')
@@ -57,7 +60,7 @@ hdr = Hdr()
 from pirates.seapatch.Reflection import Reflection
 Reflection.initialize(render)
 serverVersion = base.config.GetString('server-version', 'no_version_set')
-print 'serverVersion: ', serverVersion
+print 'serverVersion: ' , serverVersion
 from pirates.distributed import PiratesClientRepository
 cr = PiratesClientRepository.PiratesClientRepository(serverVersion, launcher)
 base.initNametagGlobals()
