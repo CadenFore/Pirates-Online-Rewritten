@@ -104,7 +104,8 @@ class Shape(DirectObject.DirectObject):
         self.texturePicker = CharGuiPicker(self.main, parent=self._parent, text=PLocalizer.ShapeTextureFrameTitle, nextCommand=self.handleNextTexture, backCommand=self.handleLastTexture)
         self.texturePicker.setPos(0, 0, 0)
         self.texturePicker.hide()
-        self.headFrame = DirectFrame(parent=self._parent, relief=None, pos=(0, 0, -0.3), scale=0.7)
+        self.headFrame = DirectFrame(parent=self._parent, relief=None, pos=(0, 0, -0.3))
+        self.headFrame.setScale(0.7)
         self.headFrame.hide()
         return
 

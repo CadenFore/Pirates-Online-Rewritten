@@ -13,6 +13,8 @@ class DistributedInventoryAI(DistributedObjectAI):
         self.stacks = []
 
     def generate(self):
+        # Trace inventory activation on AI side.
+        self.notify.warning('Generating inventory %s for owner %s' % (self.doId, self.ownerId))
         self.air.inventoryManager.addInventory(self)
 
         DistributedObjectAI.generate(self)

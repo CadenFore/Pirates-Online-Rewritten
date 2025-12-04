@@ -1,8 +1,8 @@
-from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobalUD
 from direct.directnotify import DirectNotifyGlobal
+from otp.uberdog.OtpAvatarManagerUD import OtpAvatarManagerUD
 
-class DistributedAvatarManagerUD(DistributedObjectGlobalUD):
+class DistributedAvatarManagerUD(OtpAvatarManagerUD):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedAvatarManagerUD')
 
     def __init__(self, air):
-        DistributedObjectGlobalUD.__init__(self, air)
+        OtpAvatarManagerUD.__init__(self, air)

@@ -56,9 +56,8 @@ class NPCGUI(DirectFrame, StateData.StateData):
         self.setupButtons()
 
     def loadShapeGUI(self):
-        self.shapeFrameTitle = DirectFrame(parent=self._parent, pos=(0, 0, 0.8), scale=(0.66,
-                                                                                       0.4,
-                                                                                       0.53))
+        self.shapeFrameTitle = DirectFrame(parent=self._parent, pos=(0, 0, 0.8), relief=None)
+        self.shapeFrameTitle.setScale(0.66, 0.4, 0.53)
         self.shapeFrameTitle.hide()
 
     def unload(self):

@@ -217,7 +217,8 @@ class PirateProfilePage(SocialPage.SocialPage):
         self.mainFrame.hide()
         self.skillFrame.setBin('fixed', -2)
         self.skillFrame.hide()
-        self.pirateFrame = DirectFrame(parent=self.mainFrame, relief=None, state=DGG.DISABLED, scale=0.8, pos=(-0.44, 0, -0.2))
+        self.pirateFrame = DirectFrame(parent=self.mainFrame, relief=None, state=DGG.DISABLED, pos=(-0.44, 0, -0.2))
+        self.pirateFrame.setScale(0.8)
         self.founderFrame = DirectFrame(parent=self.mainFrame, relief=None, state=DGG.DISABLED, image=None, image_pos=(0,
                                                                                                                        0,
                                                                                                                        0), pos=(-0.65, 0, 0.49))

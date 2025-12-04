@@ -39,9 +39,10 @@ class TrialNonPayerPanel(DirectFrame):
                                                                                                                   3.1))
             geom = gui2.find('**/frame')
             geom.getChild(0).stash()
-            self.imageTwo = DirectFrame(parent=self.imageOne, relief=None, image=geom, scale=1.0, pos=(0,
-                                                                                                       0,
-                                                                                                       0))
+            self.imageTwo = DirectFrame(parent=self.imageOne, relief=None, image=geom, pos=(0,
+                                                                                            0,
+                                                                                            0))
+            self.imageTwo.setScale(1.0)
             self.titleText = DirectLabel(parent=self.imageOne, relief=None, text=PLocalizer.VR_FeaturePopTitle, text_align=TextNode.ACenter, text_scale=0.2, text_fg=PiratesGuiGlobals.TextFG16, text_font=PiratesGlobals.getPirateFont(), text_shadow=PiratesGuiGlobals.TextShadow, pos=(0,
                                                                                                                                                                                                                                                                                           0,
                                                                                                                                                                                                                                                                                           0.2))
@@ -74,7 +75,8 @@ class TrialNonPayerPanel(DirectFrame):
                                                                                                                                0.95), scale=0.8, pos=(4.5,
                                                                                                                                                       0,
                                                                                                                                                       3.0))
-            self.imageTwo = DirectFrame(parent=self.imageOne, relief=None, image=gui2.find('**/but_compass'), scale=1.0, pos=(-0.49, 0, 0.22))
+            self.imageTwo = DirectFrame(parent=self.imageOne, relief=None, image=gui2.find('**/but_compass'), pos=(-0.49, 0, 0.22))
+            self.imageTwo.setScale(1.0)
             self.titleText = DirectLabel(parent=self.imageOne, relief=None, text=PLocalizer.FirstAddTitle, text_align=TextNode.ALeft, text_scale=0.1, text_wordwrap=10, text_fg=PiratesGuiGlobals.TextFG1, text_font=PiratesGlobals.getPirateFont(), text_shadow=PiratesGuiGlobals.TextShadow, text_pos=(0, -0.05), pos=(-0.26, 0, 0.29))
             self.fullText = DirectLabel(parent=self.imageOne, relief=None, text=PLocalizer.FirstAddDisplay, text_align=TextNode.ALeft, text_scale=0.06, text_wordwrap=21, text_fg=PiratesGuiGlobals.TextFG1, text_font=PiratesGlobals.getInterfaceFont(), pos=(-0.65, 0, -0.06))
             norm_geom = gui2.find('**/but_nav')

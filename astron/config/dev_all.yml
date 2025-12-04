@@ -31,6 +31,10 @@ uberdogs:
       id: 4677
       anonymous: false
 
+    - class: DistributedAvatarManager
+      id: 4674
+      anonymous: false
+
     - class: HolidayManager
       id: 4705
       anonymous: false

@@ -20,6 +20,9 @@ Run each item in its own terminal from the repo root (`C:\Users\...\POTCO\Pirate
 3) AI shard: `astron\win32\start_ai.bat` (defaults are fine). It will log warnings about missing island/boss data because those assets are absent in the public pack; they’re expected and harmless.
 4) Client: `win32\start_client.bat` → choose “Localhost” and token `dev` to connect to your local shard. The script uses `ppython`; if your launcher name differs, set `PYTHON_CMD` inside the bat file.
 
+
+Or run the startup script which runs all of the steps above. .\win32\start_stack.bat
+
 Config touchpoints:
 - Client/game flags: `config/general.prc` (+ `config/dev.prc`).
 - Server flags (e.g., webhook URL): `config/server.prc`.

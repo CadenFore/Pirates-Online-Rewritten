@@ -534,7 +534,8 @@ class MakeAPirate(DirectObject, StateData.StateData, FSM.FSM):
     def load(self):
         self.charGui = loader.loadModel('models/gui/char_gui')
         self.triangleGui = loader.loadModel('models/gui/triangle')
-        self.bookModel = DirectFrame(parent=base.a2dTopRightNs, image=self.charGui.find('**/chargui_base'), image_pos=(-0.13, 0, 0), relief=None, pos=(-0.65, 0, -0.8), scale=0.42)
+        self.bookModel = DirectFrame(parent=base.a2dTopRightNs, image=self.charGui.find('**/chargui_base'), image_pos=(-0.13, 0, 0), relief=None, pos=(-0.65, 0, -0.8))
+        self.bookModel.setScale(0.42)
         self.bookModel.hide()
         self.lowBookModel = DirectFrame(parent=base.a2dBottomLeftNs, relief=None, frameSize=(-1, 1, -0.12, 0.12), frameColor=(0.5,
                                                                                                                               0.5,

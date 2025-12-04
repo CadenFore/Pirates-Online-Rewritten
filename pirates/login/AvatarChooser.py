@@ -256,7 +256,10 @@ class AvatarChooser(DirectObject, StateData):
         self.ropeFrame.reparentTo(self.avatarListFrame)
         self.subFrame.reparentTo(self.avatarListFrame)
         self.versionLabel = DirectLabel(parent=base.a2dTopRight, relief=None, text_scale=0.04, text_fg=(1, 1, 1, 0.5), text='%s\n%s' % (base.cr.getServerVersion(), base.win.getPipe().getInterfaceName()), text_align=TextNode.ARight, pos=(-0.05, 0, -0.05))
-        self.highlightFrame = DirectFrame(parent=base.a2dBottomCenter, relief=None, image=self.model.find('**/avatar_c_B_frame'), image_scale=0.37, pos=(0, 0, 0.25), scale=0.9)
+        # Panda3D throws if you pass initopt "scale" to DirectFrame on some builds,
+        # so set the scale after construction instead of via keyword args.
+        self.highlightFrame = DirectFrame(parent=base.a2dBottomCenter, relief=None, image=self.model.find('**/avatar_c_B_frame'), image_scale=0.37, pos=(0, 0, 0.25))
+        self.highlightFrame.setScale(0.9)
         self.highlightFrame.hide()
         if base.config.GetBool('allow-linked-accounts', 0):
             self.shareButton = DirectButton(parent=self.highlightFrame, relief=None, text_scale=0.045, text_fg=(1, 0.9, 0.7, 0.9), text_shadow=PiratesGuiGlobals.TextShadow, text=('', '', PLocalizer.AvatarChooserShared, ''), image=(self.model.find('**/avatar_c_B_unlock'), self.model.find('**/avatar_c_B_unlock'), self.model.find('**/avatar_c_B_unlock_over')), image_scale=0.37, text_pos=(0, -0.1), pos=(-0.51, 0, -0.08), scale=1.3, command=self.__handleShare)
@@ -275,7 +278,8 @@ class AvatarChooser(DirectObject, StateData):
         self.accept('arrow_up', self.__handleArrowUp)
         self.accept('arrow_down', self.__handleArrowDown)
         self.deleteButton = DirectButton(parent=self.highlightFrame, relief=None, text_scale=0.045, text_fg=(1, 0.9, 0.7, 0.9), text_shadow=PiratesGuiGlobals.TextShadow, text=('', '', PLocalizer.AvatarChooserDelete, ''), image=(self.model.find('**/avatar_c_B_delete'), self.model.find('**/avatar_c_B_delete'), self.model.find('**/avatar_c_B_delete_over')), image_scale=0.37, text_pos=(0, -0.1), pos=(0.51, 0, -0.08), scale=1.3, command=self.__handleDelete)
-        self.quitFrame = DirectFrame(parent=base.a2dBottomRight, relief=None, image=self.model.find('**/avatar_c_C_back'), image_scale=0.37, pos=(-0.4, 0, 0.21), scale=0.9)
+        self.quitFrame = DirectFrame(parent=base.a2dBottomRight, relief=None, image=self.model.find('**/avatar_c_C_back'), image_scale=0.37, pos=(-0.4, 0, 0.21))
+        self.quitFrame.setScale(0.9)
         self.quitFrameForeground = DirectFrame(parent=self.quitFrame, relief=None, image=self.model.find('**/avatar_c_C_frame'), image_scale=0.37, pos=(0, 0, 0))
         self.logoutButton = DirectButton(parent=self.quitFrame, relief=None, text_scale=0.045, text_fg=(1, 0.9, 0.7, 0.9), text_shadow=PiratesGuiGlobals.TextShadow, text=PLocalizer.OptionsPageLogout, image=(self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box'), self.model.find('**/avatar_c_C_box_over')), image_scale=0.37, text_pos=(0, -0.015), pos=(0, 0, 0.2), command=self.__handleLogoutWithoutConfirm)
         self.logoutButton.hide()

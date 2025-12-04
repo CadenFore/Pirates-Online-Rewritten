@@ -148,14 +148,16 @@ class ClothesGUI(DirectFrame, StateData.StateData):
     def loadHatGUI(self):
         self.maleHatColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                           1,
-                                                                                                                                                          1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                          0,
-                                                                                                                                                                                                          0.55))
+                                                                                                                                                          1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                              0,
+                                                                                                                                                                                              0.55))
+        self.maleHatColorFrameTitle.setScale(0.8)
         self.femaleHatColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                             1,
-                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                            0,
-                                                                                                                                                                                                            0.55))
+                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                                0,
+                                                                                                                                                                                                0.55))
+        self.femaleHatColorFrameTitle.setScale(0.8)
         self.hatPicker = CharGuiPicker(self.main, parent=self.clothesFrame, text=PLocalizer.MakeAPirateClothingHatStyle, nextCommand=Functor(self.handleNextClothing, 'HAT'), backCommand=Functor(self.handleLastClothing, 'HAT'))
         self.hatPicker.setPos(-0.3, 0.0, 0.4)
         self.hatGenPics = DirectButton(parent=self.genPicsButtonsFrame, relief=DGG.RAISED, frameSize=(-0.17, 0.17, -0.05, 0.05), borderWidth=(0.008,
@@ -175,14 +177,16 @@ class ClothesGUI(DirectFrame, StateData.StateData):
                                                                                                                                                                                                                                      -1.1), command=self.handlePantGenPics)
         self.maleBeltColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                            1,
-                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                           0,
-                                                                                                                                                                                                           -1.45))
+                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                               0,
+                                                                                                                                                                                               -1.45))
+        self.maleBeltColorFrameTitle.setScale(0.8)
         self.femaleBeltColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                              1,
-                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                             0,
-                                                                                                                                                                                                             -1.45))
+                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                                 0,
+                                                                                                                                                                                                 -1.45))
+        self.femaleBeltColorFrameTitle.setScale(0.8)
         self.beltPicker = CharGuiPicker(self.main, parent=self.clothesFrame, text=PLocalizer.MakeAPirateClothingBeltStyle, nextCommand=Functor(self.handleNextClothing, 'BELT'), backCommand=Functor(self.handleLastClothing, 'BELT'))
         self.beltPicker.setPos(-0.3, 0.0, -1.5)
         self.beltGenPics = DirectButton(parent=self.genPicsButtonsFrame, relief=DGG.RAISED, frameSize=(-0.17, 0.17, -0.05, 0.05), borderWidth=(0.008,
@@ -227,36 +231,42 @@ class ClothesGUI(DirectFrame, StateData.StateData):
         self.maleShirtColorButtons = []
         self.maleShirtColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                             1,
-                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                            0,
-                                                                                                                                                                                                            0.15))
+                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                                0,
+                                                                                                                                                                                                0.15))
+        self.maleShirtColorFrameTitle.setScale(0.8)
         self.maleShirtColorButtons = self.makeColorSelector(self.maleShirtColorFrameTitle, MALE_SHIRT_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetShirtColor)
         self.maleShirtColorFrameTitle.hide()
         self.maleVestColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                            1,
-                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, -0.25))
+                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, -0.25))
+        self.maleVestColorFrameTitle.setScale(0.8)
         self.maleVestColorButtons = self.makeColorSelector(self.maleVestColorFrameTitle, MALE_VEST_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetVestColor)
         self.maleVestColorFrameTitle.hide()
         self.maleCoatColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                            1,
-                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, -0.65))
+                                                                                                                                                           1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, -0.65))
+        self.maleCoatColorFrameTitle.setScale(0.8)
         self.maleCoatColorButtons = self.makeColorSelector(self.maleCoatColorFrameTitle, MALE_COAT_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetCoatColor)
         self.maleCoatColorFrameTitle.hide()
         self.femaleShirtColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                               1,
-                                                                                                                                                              1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35,
-                                                                                                                                                                                                              0,
-                                                                                                                                                                                                              0.15))
+                                                                                                                                                              1.0), image_pos=(0.3, 0, -0.0), pos=(0.35,
+                                                                                                                                                                                                  0,
+                                                                                                                                                                                                  0.15))
+        self.femaleShirtColorFrameTitle.setScale(0.8)
         self.femaleShirtColorButtons = self.makeColorSelector(self.femaleShirtColorFrameTitle, FEMALE_SHIRT_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetShirtColor)
         self.femaleShirtColorFrameTitle.hide()
         self.femaleVestColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                              1,
-                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, -0.25))
+                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, -0.25))
+        self.femaleVestColorFrameTitle.setScale(0.8)
         self.femaleVestColorButtons = self.makeColorSelector(self.femaleVestColorFrameTitle, FEMALE_VEST_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetVestColor)
         self.femaleVestColorFrameTitle.hide()
         self.femaleCoatColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                              1,
-                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, -0.65))
+                                                                                                                                                             1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, -0.65))
+        self.femaleCoatColorFrameTitle.setScale(0.8)
         self.femaleCoatColorButtons = self.makeColorSelector(self.femaleCoatColorFrameTitle, FEMALE_COAT_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetCoatColor)
         self.femaleCoatColorFrameTitle.hide()
         return
@@ -284,13 +294,15 @@ class ClothesGUI(DirectFrame, StateData.StateData):
         idx = 0
         self.maleBotColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                           1,
-                                                                                                                                                          1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, vertPlace))
+                                                                                                                                                          1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, vertPlace))
+        self.maleBotColorFrameTitle.setScale(0.8)
         self.maleBotColorFrameTitle.hide()
         self.malePantColorButtons = self.makeColorSelector(self.maleBotColorFrameTitle, MALE_PANTS_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetPantColor)
         idx = 1
         self.femaleBotColorFrameTitle = DirectFrame(parent=self.clothesFrame, relief=None, image=self.main.charGui.find('**/chargui_frame01'), image_scale=(0.9,
                                                                                                                                                             1,
-                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), scale=0.8, pos=(0.35, 0, vertPlace))
+                                                                                                                                                            1.0), image_pos=(0.3, 0, -0.0), pos=(0.35, 0, vertPlace))
+        self.femaleBotColorFrameTitle.setScale(0.8)
         self.femaleBotColorFrameTitle.hide()
         self.femalePantColorButtons = self.makeColorSelector(self.femaleBotColorFrameTitle, FEMALE_PANTS_COLOR_SELECTIONS, 0.0, 0.0, self.handleSetPantColor)
         return

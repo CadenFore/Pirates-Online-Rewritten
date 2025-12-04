@@ -1,9 +1,13 @@
+import sys
+import traceback
+
 from direct.directnotify.DirectNotifyGlobal import directNotify
 from pirates.distributed.PiratesInternalRepository import PiratesInternalRepository
 from direct.distributed.PyDatagram import *
 from otp.distributed.DistributedDirectoryAI import DistributedDirectoryAI
 from otp.distributed.OtpDoGlobals import *
 from pirates.uberdog.PiratesRPCServerUD import PiratesRPCServerUD
+from pirates.uberdog.DistributedInventoryManagerUD import DistributedInventoryManagerUD
 
 class PiratesUberRepository(PiratesInternalRepository):
     notify = directNotify.newCategory('PiratesUberRepository')
@@ -37,7 +41,18 @@ class PiratesUberRepository(PiratesInternalRepository):
             self.centralLogger = self.generateGlobalObject(OTP_DO_ID_CENTRAL_LOGGER, 'CentralLogger')
             self.csm = self.generateGlobalObject(OTP_DO_ID_CLIENT_SERVICES_MANAGER, 'ClientServicesManager')
             self.travelAgent = self.generateGlobalObject(OTP_DO_ID_PIRATES_TRAVEL_AGENT, 'DistributedTravelAgent')
-            self.inventoryManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_INVENTORY_MANAGER, 'DistributedInventoryManager')
+            # Avatar manager (handles delete/create requests and avatar lists).
+            self.notify.warning('Generating AvatarManager (DOID %s)...' % OTP_DO_ID_PIRATES_AVATAR_MANAGER)
+            self.avatarManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_AVATAR_MANAGER, 'DistributedAvatarManager')
+            self.notify.warning('AvatarManager generated: %s' % bool(self.avatarManager))
+            # Use a local (non-global) UD inventory manager so we avoid DOID conflicts with the AI-side
+            # inventory manager, while still letting ClientServicesManager perform DB setup.
+            if config.GetBool('want-ud-inventory-manager', False):
+                # Legacy path: generate a full global object if explicitly requested.
+                self.inventoryManager = self.generateGlobalObject(OTP_DO_ID_PIRATES_INVENTORY_MANAGER, 'DistributedInventoryManager')
+            else:
+                self.inventoryManager = DistributedInventoryManagerUD(self)
+                self.notify.warning('Created local InventoryManagerUD helper (non-global) to service CSM login flow')
             self.holidayMgr = self.generateGlobalObject(OTP_DO_ID_PIRATES_HOLIDAY_MANAGER, 'HolidayManager')
             self.codeMgr = self.generateGlobalObject(OTP_DO_ID_PIRATES_CODE_REDEMPTION, 'CodeRedemption')
             self.chatManager = self.generateGlobalObject(OTP_DO_ID_CHAT_MANAGER, 'DistributedChatManager')
@@ -49,5 +64,6 @@ class PiratesUberRepository(PiratesInternalRepository):
             self.notify.warning('Global generation complete.')
         except Exception:
             print '[UD] Exception during globals:'
-            self.notify.exception('Failed to generate globals!')
+            traceback.print_exc()
+            self.notify.warning('Failed to generate globals: %s' % traceback.format_exc())
             raise

@@ -75,7 +75,8 @@ class BodyGUI(DirectFrame, StateData.StateData):
                                                                                                                           1,
                                                                                                                           1,
                                                                                                                           1), text_scale=0.18, text_pos=(0,
-                                                                                                                                                         0), pos=(0, 0, -0.1), scale=0.7)
+                                                                                                                                                         0), pos=(0, 0, -0.1))
+        self.shapeFrameTitle.setScale(0.7)
         self.shapeFrameTitle.hide()
         return
 
@@ -96,7 +97,8 @@ class BodyGUI(DirectFrame, StateData.StateData):
                                                                                                                                                                                                                               1,
                                                                                                                                                                                                                               1), text_scale=0.18, text_pos=(0, -0.04), pos=(0,
                                                                                                                                                                                                                                                                              0,
-                                                                                                                                                                                                                                                                             -1.0), scale=0.7)
+                                                                                                                                                                                                                                                                             -1.0))
+        self.maleColorFrameTitle.setScale(0.7)
         self.maleColorFrameTitle.hide()
         self.maleColorButtons = []
         xOffset = -0.4
@@ -120,7 +122,8 @@ class BodyGUI(DirectFrame, StateData.StateData):
                                                                                                                                                                                                                                 1,
                                                                                                                                                                                                                                 1), text_scale=0.18, text_pos=(0, -0.04), pos=(0,
                                                                                                                                                                                                                                                                                0,
-                                                                                                                                                                                                                                                                               -1.0), scale=0.7)
+                                                                                                                                                                                                                                                                               -1.0))
+        self.femaleColorFrameTitle.setScale(0.7)
         self.femaleColorFrameTitle.hide()
         self.femaleColorButtons = []
         xOffset = -0.4

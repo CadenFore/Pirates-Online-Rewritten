@@ -258,10 +258,11 @@ class WorldMap(DirectFrame):
         side.camera.setH(90)
         shot = NodePath(cm.generate())
         shot.setTexture(side.getTexture(), 1)
-        df = DirectFrame(geom=shot, relief=None, parent=aspect2d, scale=0.5, pos=(0.833, 0, -0.5), text='side', text_scale=0.1, text_pos=(-0.75, 0.75, 0), text_fg=(1,
+        df = DirectFrame(geom=shot, relief=None, parent=aspect2d, pos=(0.833, 0, -0.5), text='side', text_scale=0.1, text_pos=(-0.75, 0.75, 0), text_fg=(1,
                                                                                                                                                                     1,
                                                                                                                                                                     1,
                                                                                                                                                                     1))
+        df.setScale(0.5)
         self.collisionBufferFrames.append((side, df))
         top = SceneBuffer('top-buffer', size=(512, 512), clearColor=Vec4(0, 0, 0, 1), sceneGraph=self.render)
         top.camera.setPos(0, 1, 4)
@@ -269,12 +270,13 @@ class WorldMap(DirectFrame):
         cm.setName('Top')
         shot = NodePath(cm.generate())
         shot.setTexture(top.getTexture(), 1)
-        df = DirectFrame(geom=shot, relief=None, parent=aspect2d, scale=0.5, pos=(0.833,
-                                                                                  0,
-                                                                                  0.5), text='top', text_scale=0.1, text_pos=(-0.75, 0.75, 0), text_fg=(1,
-                                                                                                                                                        1,
-                                                                                                                                                        1,
-                                                                                                                                                        1))
+        df = DirectFrame(geom=shot, relief=None, parent=aspect2d, pos=(0.833,
+                                                                       0,
+                                                                       0.5), text='top', text_scale=0.1, text_pos=(-0.75, 0.75, 0), text_fg=(1,
+                                                                                                                                               1,
+                                                                                                                                               1,
+                                                                                                                                               1))
+        df.setScale(0.5)
         self.collisionBufferFrames.append((top, df))
         self.mapBall.traverser.showCollisions(self.render)
         colNodes = self.render.findAllMatches('**/camRayNode')
